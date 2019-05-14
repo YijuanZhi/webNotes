@@ -47,7 +47,7 @@ And the following cotent is the result of the previous code.
 this is a break<br>So that this is the second line.
 </p>
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
-<img src="avatar.jpg" alt="photo of me" height = 100px width=auto/>
+<img src="avatar.jpg" alt="photo of me" height = 100px width=auto border-radius=50%/>
 
 
 ## CSS Section
