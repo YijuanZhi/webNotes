@@ -50,12 +50,12 @@ this is a break<br>So that this is the second line.
 <img src="images/avatar.jpg" alt="photo of me" height = 100px width=auto/>
 
 Result section ends here.
-(Markdown file in github seems to fail to fetch the image in another folder though.)
+(Markdown file in github seems to fail to fetch the image in another folder sometimes.)
 
 ## CSS Section
 - For elements in html, class can be used for as many times as we want, but id can only be used once in each html document.
-- CSS consists of selectors and their declaration blocks. Here are some instances of selectors for *, *tag, class and id:
-```CSS
+- CSS consists of selectors and their declaration blocks. Here are some instances of selectors for *, tag, class and id:
+```css
 /*
   * is for the whole webpage including everyhing.
 */
@@ -102,4 +102,38 @@ p {
   float: left;
   margin-top: 70px;
 }
+```
+- Here are some very useful properties:
+```
+/* top right bottom left(same works for margin)*/
+padding: 5px 0px 5px 0px;
+
+/*text indent for the first line of text. */
+text-indent: 40px;
+  
+/*
+relative makes different element connect to each other in some way, but absolute makes them relative only to the whole border. 
+*/
+position: relative;
+position: absolute;
+
+/*
+We use float to make different element can be placed side by side instead of up and down.
+*/
+float: left;
+float: right;
+
+/*
+make stuff after this division sepereated visually from this and previous divisions.
+*/
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*
+overflow:auto; is going to everything presented inside the box instead of coming out of the border.
+*/
+overflow: auto;
 ```
