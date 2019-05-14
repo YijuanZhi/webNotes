@@ -49,8 +49,9 @@ p {
 
 #author-text {
   color: mediumseagreen;
-  text-align: end;
   font-size: 10px;
+  float: left;
+  margin-top: 70px;
 }
 
 .container {
@@ -69,6 +70,7 @@ p {
   width: 25%;
   float: left;
   height: 600px;
+  position: relative;
 }
 
 .other-post {
@@ -79,15 +81,36 @@ p {
 }
 
 .author-box {
+  /*
+    overflow:auto; is going to everything presented inside the box
+    */
+  overflow: auto;
   font-size: 10px;
   background-color: azure;
   border-top: 1px solid grey;
 }
+.author-box img {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  float: left;
+}
+
 .clearfix::after {
+  /*
+    make stuff after this division sepereated visually from this and previous divisions.
+    */
   content: "";
   display: table;
   clear: both;
 }
 
 .other {
+  margin: 10px;
+}
+
+.date {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
