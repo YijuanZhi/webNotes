@@ -1,4 +1,4 @@
-# HTML/CSS Web Design Practice Notes
+# HTML/CSS/Web Design Typography Practice Notes
 Hi there! This is just a simple note of learning html and css!
 
 ## HTML Section
@@ -134,6 +134,27 @@ make stuff after this division sepereated visually from this and previous divisi
 
 /*
 overflow:auto; is going to everything presented inside the box instead of coming out of the border.
+
 */
 overflow: auto;
+
+/*
+top and right is absolute to the border of the current selector.
+
+*/
+.date {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 ```
+
+## Web Design Typography
+- Use a font size of 15px to 25 px(like 22px) for the body text depending on the whole view of the website.
+- *BIG* title, depending on what is the main part of the view. 
+- Use line spacing between 120% to 150%(like 150%).
+- For each text line, 45 to 90 characters is good.
+- Good fonts examples:
+![fonts for few text](images/font2.jpg)
+- Good fonts or a lot of text:
+![fonts for more text](images/font1.jpg)
