@@ -39,6 +39,7 @@ this is a break<br>So that this is the second line.
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
 <img src="avatar.jpg" alt="photo of me" />
 ```
+And the following cotent is the result of the previous code.
 <p>This is <strong>strong</strong>!</p>
 <p>This is <em>em</em>phasize.</p>
 <p>This is <u>underlined</u> text.</p>
@@ -46,7 +47,7 @@ this is a break<br>So that this is the second line.
 this is a break<br>So that this is the second line.
 </p>
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
-<img src="avatar.jpg" alt="photo of me" />
+<img src="avatar.jpg" alt="photo of me" height = 100px width=auto/>
 
 
 ## CSS Section
