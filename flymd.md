@@ -1,9 +1,9 @@
 # HTML/CSS Web Design Practice Notes
 
 ## HTML section
- - <!-- This is a comment section-->
+ - `<!-- This is a comment section-->`
  - A html file's basic structure:
-'''fLyMd-mAkEr
+```html
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <!--body part is used for cotent. -->
-</body>
+</body>fLyMd-mAkEr
 </html>
-'''
+```
  - 
