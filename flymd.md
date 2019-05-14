@@ -1,4 +1,5 @@
 # HTML/CSS Web Design Practice Notes
+Hi there! This is just a simple note of learning html and css!
 
 ## HTML Section
  - `<!-- This is a comment section-->`
@@ -36,7 +37,16 @@
 this is a break<br>So that this is the second line.
 </p>
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
-<img src="avatar.jpg" alt="photo of me" />fLyMd-mAkEr
+<img src="avatar.jpg" alt="photo of me" />
 ```
+<p>This is <strong>strong</strong>!</p>
+<p>This is <em>em</em>phasize.</p>
+<p>This is <u>underlined</u> text.</p>
+<p>
+this is a break<br>So that this is the second line.
+</p>
+<a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
+<img src="avatar.jpg" alt="photo of me" />
 
+fLyMd-mAkEr
 ## CSS Section
