@@ -37,9 +37,9 @@ Hi there! This is just a simple note of learning html and css!
 this is a break<br>So that this is the second line.
 </p>
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
-<img src="avatar.jpg" alt="photo of me" height = 100px width = auto border-radius=50%/>
+<img src="avatar.jpg" alt="photo of me" height = 100px width = auto/>
 ```
-And the following cotent is the result of the previous code.
+And the following cotent is the result of the previous code:
 <p>This is <strong>strong</strong>!</p>
 <p>This is <em>em</em>phasize.</p>
 <p>This is <u>underlined</u> text.</p>
@@ -47,7 +47,9 @@ And the following cotent is the result of the previous code.
 this is a break<br>So that this is the second line.
 </p>
 <a href="https://github.com/YijuanZhi" target="_blank">Link to my github.</a>
-<img src="avatar.jpg" alt="photo of me" height = 100px width=auto border-radius=50%/>
+<img src="avatar.jpg" alt="photo of me" height = 100px width=auto/>
+
+Result section ends here.
 
 
 ## CSS Section
