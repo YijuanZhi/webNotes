@@ -18,6 +18,17 @@ Hi there! This is just a simple note of learning html and css!
 ### Head Part
 - `<title>some title</title>` is used for the title of the whole webpage.
 - `<link rel="stylesheet" type="text/css" href="style.css" />` using link tag to link the style.css file to our index.html file. So that we can use a external css file to style up our html file.
+- `<meta>`tag provides metadata about the html document. Meta tag always goes inside head section. Metadata will not be displayed on the page, but will be machine parsable. Meta elements are typically used to specify page description, keywords, author of the document, last modified, and other metadata. Here are some examples using meta tag:
+```html
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Free Web tutorials">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+  <meta name="author" content="John Doe">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+```
+The viewport is the user's visible area of a web page. It varies with the device, and will be smaller on a mobile phone than on a computer screen.
 
 ### Body part
 - There are 6 levels of headings: `<h1>` to `<h6>`.
@@ -134,13 +145,11 @@ make stuff after this division sepereated visually from this and previous divisi
 
 /*
 overflow:auto; is going to everything presented inside the box instead of coming out of the border.
-
 */
 overflow: auto;
 
 /*
 top and right is absolute to the border of the current selector.
-
 */
 .date {
   position: absolute;
@@ -158,3 +167,6 @@ top and right is absolute to the border of the current selector.
 ![fonts for few text](images/font2.jpg)
 - Good fonts or a lot of text:
 ![fonts for more text](images/font1.jpg)
+- Use only one base color, here is a link to [flat UI colors!](https://www.materialui.co/flatuicolors) And [0to255!](https://www.0to255.com/), it is my favorite!
+- Never use black for the main color design.
+- 
