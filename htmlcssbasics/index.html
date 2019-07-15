@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1>Things that I learned</h1>
+
+    <h2>The table element</h2>
+    <table border=1>
+        <thead>
+            <tr>
+                <th>This is the first table head</th>
+                <th>This is the second table head</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>This is the first of this table details</td>
+                <td>This is the second of this table details</td>
+            </tr>
+            <tr>
+                <td>This is the first of thais table details</td>
+                <td>This is the second of this table details</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>The form element, its label and input</h2>
+    <!-- (Where) action is for the form to send data to target location -->
+    <!-- (How) method specify how the data would be used either GET or POST -->
+    <form action="" method="">
+        <label for="username">Username:</label>
+        <input id="username" type="text" placeholder="Enter your username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input id="password" type="password" placeholder="Enter your password" required>
+        <input type="submit">
+    </form>
+
+    <h2>Radio selection box(value, name), and also dropdown select tag(option)</h2>
+    <p>Do you prefer cat or dog?</p>
+    <form action="" method="">
+        <label>
+            Dogs:
+            <input type="radio" name="petChoice" value="dogs">
+        </label>
+        <label>
+            Cats:
+            <input type="radio" name="petChoice" value="cats">
+        </label>
+        <select name="color">
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="blue">Blue</option>
+        </select>
+
+        <!-- Works just like the submit type input -->
+        <button>Submit</button>
+    </form>
+
+</body>
+
+</html>

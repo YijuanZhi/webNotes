@@ -1,0 +1,7 @@
+body {
+  background-attachment: fixed;
+  width: 80%;
+  max-width: 700px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}

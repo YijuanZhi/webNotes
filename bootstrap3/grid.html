@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap.css">
+    <style type="text/css">
+        .pink {
+            background-color: pink;
+            border: 1px solid blue;
+        }
+
+        .orange {
+            background-color: orange;
+            border: 1px dashed red;
+        }
+    </style>
+    <title>Grid practice</title>
+</head>
+
+<body>
+    <!-- Very basic grid system only using row and col-lg-x  -->
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-lg-6 pink">Column 6</div>
+            <div class="col-lg-6 pink">Column 6</div>
+        </div>
+    </div> -->
+
+    <!-- For large device, medium device, small device and extra small device -->
+    <!-- large will automatically be covered with col-lg-3 -->
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+            <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+            <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+            <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+        </div>
+    </div> -->
+
+    <!-- Nested grids nested columns -->
+    <div class="container">
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">
+            <div class="row">
+                <div class="col-lg-6 orange">nested col</div>
+                <div class="col-lg-6 orange">nested col</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12 pink">col</div>
+    </div>
+
+</body>
+
+</html>

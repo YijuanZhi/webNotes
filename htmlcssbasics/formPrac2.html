@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registation practice</title>
+    <link rel="stylesheet" href="formPrac2css.css">
+</head>
+
+<body>
+    <h1>Registration</h1>
+    <p>This is the paragraph part.</p>
+    <form action="" method="">
+        <div>
+            <label>
+                First Name:
+                <input type="text" placeholder="Enter first name" name="firstName" required>
+            </label>
+            <label>
+                Second Name:
+                <input type="text" placeholder="Enter second name" name="secondName" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                Male
+                <input type="radio" name="gender" value="male">
+            </label>
+            <label>
+                Female
+                <input type="radio" name="gender" value="female">
+            </label>
+            <label>
+                Other
+                <input type="radio" name="gender" value="other">
+            </label>
+        </div>
+        <div>
+            <label>
+                Email
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </label>
+            <label>
+                Password
+                <input pattern=".{5,11}" type="password" name="password" required title="5 to 11 characters">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Birthday:
+                <select name="month" required>
+                    <option value="" disabled selected>Month</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                </select>
+                <select name="day">
+                    <option value="" disabled selected>Day</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <select name="year" id="">
+                    <option value="" disabled selected>Year</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Do you agree to the policy?
+                <input type="checkbox" required>
+            </label>
+        </div>
+
+        <input type="submit">
+    </form>
+</body>
+
+</html>
