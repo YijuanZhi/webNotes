@@ -1,0 +1,11 @@
+#container {
+  border: 2px solid gray;
+  margin: 0 auto;
+  width: 360px;
+}
+
+.done {
+  color: grey;
+  text-decoration: line-through;
+  transition-duration: 0.4s;
+}
