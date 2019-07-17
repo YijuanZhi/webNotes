@@ -1,11 +1,118 @@
-#container {
-  border: 2px solid gray;
-  margin: 0 auto;
-  width: 360px;
+body {
+  font-family: Helvetica, sans-serif;
+  font-weight: lighter;
+  letter-spacing: 0.3px;
+  background: #2c3e50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4ca1af,
+    #2c3e50
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #4ca1af,
+    #2c3e50
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+#container {
+  background-color: #f7f7f7;
+  /*border: 2px solid gray;
+  */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+  margin: 100px auto;
+  width: 360px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+h1 {
+  font-size: 30px;
+  letter-spacing: 1px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
+  padding: 10px 30px;
+  background-color: #2980b8;
+  color: white;
+  margin: 0;
+}
+
+input {
+  font-size: inherit;
+  color: #2980b8;
+  margin: 0;
+  display: inline;
+  padding-left: 30px;
+  width: 328px;
+  height: 40px;
+  border: none;
+  outline: none;
+}
+
+input:focus {
+  background-color: #e6f2f9;
+}
+
+ul {
+  color: rgb(73, 73, 73);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo {
+  text-decoration: none;
+  width: 360px;
+  /* padding: 15px 30px; */
+  line-height: 40px;
+  margin: 0;
+  /* border: 1px solid black; */
+}
+
+/* Todo Lists part */
+li {
+  background-color: #f7f7f7;
+  width: 300px;
+}
+
+li:nth-child(2n) {
+  background-color: white;
+}
+
+i.fa-minus-circle {
+  margin-right: 5px;
+}
+
+i.fa-plus-circle {
+  float: right;
+}
+
+span {
+  display: inline-block;
+  height: 40px;
+  /* when hovered, the width will become 40px */
+  width: 0px;
+  margin-right: 30px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  opacity: 0;
+}
+
+li:hover span {
+  width: 40px;
+  opacity: 1;
+  transition-duration: 0.5s;
+}
+
+/* .whitebox {
+  background-color: white;
+} */
+
 .done {
-  color: grey;
+  color: darkgray;
   text-decoration: line-through;
-  transition-duration: 0.4s;
 }
