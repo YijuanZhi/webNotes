@@ -1,0 +1,17 @@
+<% include partials/header %>
+    <h1>This is a ejs home page. Welcome!</h1>
+    <%# a ejs varible example %>
+    <h1>You fell in love with: <%=thingVar%> </h1>
+
+    <%# 2 ejs control flow examples %>
+    <% if(thingVar.toLowerCase() === "zhi"){ %>
+        <p> Good choice! I am Yijuan Zhi. </p>
+    <% }else{ %>
+        <p> Bad choice! You should have choosed Yijuan Zhi.</p>
+    <% } %>
+
+    <% posts.forEach(function(post){ %>
+        <li>Title: <%= post.title %> -- Author: <%= post.author %></li>
+    <% }) %>
+<% include partials/footer %>
+

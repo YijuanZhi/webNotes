@@ -1,0 +1,17 @@
+{
+  "name": "omdbapi",
+  "version": "1.0.0",
+  "description": " An application using apis from OMDB to display info of movies",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ZacZhi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "request-promise": "^4.2.4"
+  }
+}
