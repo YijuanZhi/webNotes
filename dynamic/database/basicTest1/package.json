@@ -1,0 +1,18 @@
+{
+  "name": "basictest1",
+  "version": "1.0.0",
+  "description": "basic test of mongoose operations",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ZacZhi",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0"
+  },
+  "dependencies": {
+    "mongoose": "^5.6.5"
+  }
+}
