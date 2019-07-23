@@ -14,76 +14,14 @@ let photoSchema = new mongoose.Schema({
   name: String,
   url: String
 });
-let Photo = mongoose.model("photo_camp", photoSchema);
+let Photo = mongoose.model("photo_camps", photoSchema);
 
-let items = [
-  {
-    name: "Forest Lake",
-    url:
-      "https://images.unsplash.com/photo-1561454260-8559bd155736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
-  },
-  {
-    name: "Sea Doggo",
-    url:
-      "https://images.unsplash.com/photo-1561470678-f67882eb3fef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1959&q=80"
-  },
-  {
-    name: "Sunset Sea",
-    url:
-      "https://images.unsplash.com/photo-1561485039-765c8e81686d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  },
-  {
-    name: "Racing Car",
-    url:
-      "https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  },
-  {
-    name: "Forest Lake",
-    url:
-      "https://images.unsplash.com/photo-1561454260-8559bd155736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
-  },
-  {
-    name: "Sea Doggo",
-    url:
-      "https://images.unsplash.com/photo-1561470678-f67882eb3fef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1959&q=80"
-  },
-  {
-    name: "Sunset Sea",
-    url:
-      "https://images.unsplash.com/photo-1561485039-765c8e81686d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  },
-  {
-    name: "Racing Car",
-    url:
-      "https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  },
-  {
-    name: "Forest Lake",
-    url:
-      "https://images.unsplash.com/photo-1561454260-8559bd155736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
-  },
-  {
-    name: "Sea Doggo",
-    url:
-      "https://images.unsplash.com/photo-1561470678-f67882eb3fef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1959&q=80"
-  },
-  {
-    name: "Sunset Sea",
-    url:
-      "https://images.unsplash.com/photo-1561485039-765c8e81686d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  },
-  {
-    name: "Racing Car",
-    url:
-      "https://images.unsplash.com/photo-1561444533-fa0a9266bf67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-  }
-];
-
-// Routes=======================================================================
+// Routes(RESTful)=======================================================================
 app.get("/", (req, res) => {
   res.render("home");
 });
 
+// INDEX
 app.get("/items", (req, res) => {
   Photo.find({}, (err, items) => {
     if (err) {
@@ -97,6 +35,7 @@ app.get("/items", (req, res) => {
   });
 });
 
+//CREATE
 app.post("/items", (req, res) => {
   let newItem = {
     name: req.body.name,
@@ -113,10 +52,28 @@ app.post("/items", (req, res) => {
   res.redirect("items");
 });
 
+//NEW
 app.get("/items/new", (req, res) => {
   res.render("new");
 });
 
+//SHOW
+app.get("/items/:id", (req, res) => {
+  let curId = req.params.id;
+  // or i can use findById(req.params.id, .... )
+  // the item will an JSON object instead of an array
+  Photo.find({ _id: curId }, (err, item) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(curId);
+      console.log(item);
+      res.render("show", { item: item[0] });
+    }
+  });
+});
+
+//Server start
 app.listen(port, () => {
   console.log("Server has started.");
 });
