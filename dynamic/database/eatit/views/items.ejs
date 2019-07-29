@@ -1,6 +1,6 @@
 <% include partials/header %>
 <header>
-    <div class="container">
+    <div id="start-head" class="container">
         <div class="jumbotron text-center">
             <h1 class="display-2">This is our favourite sites</h1>
             <p class="lead">
@@ -16,7 +16,7 @@
         <% items.forEach((item)=>{ %>
             <div class="col-md-3 mt-3">
                 <div class="card">
-                    <a href="<%= item['url'] %>">
+                    <a href="/items/<%= item['_id'] %>">
                         <img src="<%= item['url'] %>" class="card-img-top" alt="<%= item['name'] %>">
                     </a>
                     <div class="card-body">

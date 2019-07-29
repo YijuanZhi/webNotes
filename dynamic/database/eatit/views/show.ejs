@@ -5,6 +5,10 @@
     </div>
     <div class="card mt-3">
         <img class="card-img-top" src="<%=item.url%>">
+        <% item.comments.forEach((comment)=>{ %>
+            <h5 class="card-title"><%= comment.author %></h3>
+            <p class="card-text lead"><%= comment.text %></p>
+        <% }); %>
     </div>
 </div>
 <% include partials/footer %>

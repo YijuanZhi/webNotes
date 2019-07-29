@@ -10,12 +10,11 @@ app.set("view engine", "ejs");
 //Database Setup
 let mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/photo_camp", { useNewUrlParser: true });
-let photoSchema = new mongoose.Schema({
-  name: String,
-  url: String
-});
-let Photo = mongoose.model("photo_camps", photoSchema);
-
+let Photo = require("./modules/photo.js");
+let Comment = require("./modules/comment.js");
+// clear the database and reset and database
+// let seedDB = require("./seeds");
+// seedDB();
 // Routes(RESTful)=======================================================================
 app.get("/", (req, res) => {
   res.render("home");
@@ -62,15 +61,16 @@ app.get("/items/:id", (req, res) => {
   let curId = req.params.id;
   // or i can use findById(req.params.id, .... )
   // the item will an JSON object instead of an array
-  Photo.find({ _id: curId }, (err, item) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(curId);
-      console.log(item);
-      res.render("show", { item: item[0] });
-    }
-  });
+  Photo.findById({ _id: curId })
+    .populate("comments")
+    .exec((err, item) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(item);
+        res.render("show", { item: item });
+      }
+    });
 });
 
 //Server start
