@@ -27,7 +27,7 @@ app.get("/items", (req, res) => {
       console.log("Something went wrong:");
       console.log(err);
     } else {
-      res.render("items", {
+      res.render("photos/items", {
         items: items
       });
     }
@@ -48,12 +48,12 @@ app.post("/items", (req, res) => {
       console.log(item);
     }
   });
-  res.redirect("items");
+  res.redirect("photos/items");
 });
 
 //NEW
 app.get("/items/new", (req, res) => {
-  res.render("new");
+  res.render("photos/new");
 });
 
 //SHOW
@@ -68,9 +68,50 @@ app.get("/items/:id", (req, res) => {
         console.log(err);
       } else {
         console.log(item);
-        res.render("show", { item: item });
+        res.render("photos/show", { item: item });
       }
     });
+});
+
+// ========================================================
+// Comments Section Routes
+// ========================================================
+// NEW Route
+app.get("/items/:id/comments/new", (req, res) => {
+  Photo.findById(req.params.id, (err, photo) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("comments/new", { photo: photo });
+    }
+  });
+});
+
+// CREATE Route
+app.post("/items/:id/comments", (req, res) => {
+  let id = req.params.id;
+  Photo.findById(id, (err, photo) => {
+    if (err) {
+      console.log(err);
+    } else {
+      Comment.create(
+        {
+          author: req.body.comment.author,
+          text: req.body.comment.text
+        },
+        (err, comment) => {
+          if (err) {
+            console.log(err);
+          } else {
+            // console.log(comment);
+            photo.comments.push(comment);
+            photo.save();
+            res.redirect("/items/" + id);
+          }
+        }
+      );
+    }
+  });
 });
 
 //Server start

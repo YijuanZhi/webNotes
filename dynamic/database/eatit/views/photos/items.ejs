@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+<header>
+    <div id="start-head" class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-2">This is our favourite sites</h1>
+            <p class="lead">
+                Our staff love this sites and think they are very fun to watch. 
+            </p>
+            <a href="/items/new" class="btn btn-dark btn-lg mt-3">Add your favourite photo!</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <% items.forEach((item)=>{ %>
+            <div class="col-md-3 mt-3">
+                <div class="card">
+                    <a href="/items/<%= item['_id'] %>">
+                        <img src="<%= item['url'] %>" class="card-img-top" alt="<%= item['name'] %>">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= item['name'] %></h5>
+                        <div class="d-flex flex-row justify-content-between">
+                            <a href="<%= item['url'] %>" class="btn btn-primary">Add to Cart</a>
+                            <a href="<%= item['url'] %>" class="btn btn-outline-danger">Like</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include ../partials/footer %>
