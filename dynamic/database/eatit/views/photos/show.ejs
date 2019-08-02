@@ -16,6 +16,7 @@
         </div>
         <div class="col-12 col-md-9">
             <div class="mb-3">
+                <%# ========================CARD SECTION======================== %>
                 <div class="card">
                     <div class="figure">
                         <img class="card-img-top rounded mb-3" src="<%= item.url %>">
@@ -27,28 +28,50 @@
                         <div class="p-2">
                             <p class="figure-caption"> <%= item.description%> </p>
                         </div>
-                        
+
+                            <div class="card-footer text-muted text-right">
+                            <% if(!currentUser){ %>
+                                Uploaded By <%= item.author.username %>
+                            <% } else{ %>
+                                <% if(item.author.id.equals(currentUser.id)){ %>
+                                    <a href="/items/<%= item._id %>/edit" class="btn btn-warning">Edit</a>
+                                    <form action="/items/<%= item._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                <% }else{ %>
+                                    Uploaded By <%= item.author.username %>
+                                <% } %>
+                            <% } %>
+                            </div>
+
                     </div>
                 </div>
-                
+                <%# ========================COMMENTS SECTION======================== %>
                 <div class="card mt-5">
                     <div class="card-header">
                         <h4 class="card-title float-left mt-1"><strong>Comments</strong></h4> 
                         <div class="text-right">
-                            <a href="/items/<%= item._id %>/comments/new" class="btn btn-primary">Post A Comment</a>
                             <a href="/items" class="btn btn-secondary">Back to List</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <% item.comments.forEach((comment)=>{ %>
-                            <h4 class="card-title"><strong><%= comment.author %></strong></h4>
+                            
+                            <h4 class="card-title"><strong><%= comment.author.username %></strong></h4>
                             <p class="card-text m-2"> - <%= comment.text %></p>
+                            
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <a href="/items/<%= item._id %>/comments/<%=comment._id%>/edit" class="btn btn-warning">Edit</a>
+                                <form action="/items/<%= item._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST" class="d-inline">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            <% } %>
                             <hr mb-1>
+
                         <% }); %>
                         <div class="text-right">
-                            <a href="/items/<%= item._id %>/comments/new" class="btn btn-primary">Post A Comment</a>
-                            <a href="/items" class="btn btn-secondary">Back to List</a>
+                            <a href="/items/<%= item._id %>/comments/new" class="btn btn-primary btn-block">Post A Comment</a>
                         </div>
                     </div>
                 </div>

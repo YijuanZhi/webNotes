@@ -1,5 +1,5 @@
 let express = require("express");
-let router = express.Router();
+let router = express.Router({ mergeParams: true });
 let User = require("../modules/user");
 let passport = require("passport");
 
@@ -13,10 +13,14 @@ router.get("/", (req, res) => {
 // ========================================================
 // AUTHENTICATION ROUTES
 // ========================================================
+
+// ========================REGISTER========================
 router.get("/register", (req, res) => {
   res.render("./auth/register");
 });
 
+// Creating user and save it inside mongdb
+// then log in with the account
 router.post("/register", (req, res) => {
   let newUser = new User({ username: req.body.username });
   User.register(newUser, req.body.password, (err, user) => {
@@ -30,8 +34,9 @@ router.post("/register", (req, res) => {
   });
 });
 
+// ========================LOGIN========================
 router.get("/login", (req, res) => {
-  res.render("./auth/login");
+  res.render("auth/login");
 });
 
 router.post(
@@ -43,16 +48,10 @@ router.post(
   (req, res) => {}
 );
 
+// ========================LOGOUT========================
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/items");
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

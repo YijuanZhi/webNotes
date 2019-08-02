@@ -40,31 +40,31 @@ function seekDB() {
     } else {
       console.log("Delete all the photos:");
       console.log(photos);
-      data.forEach(item => {
-        Photo.create(item, (err, item) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Create a new photo:");
-            console.log(item);
-            Comment.create(
-              {
-                author: "Yorick Dan",
-                text:
-                  "This picture is awesome! I just made it as my desktop wallpaper!"
-              },
-              (err, comment) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  item.comments.push(comment);
-                  item.save();
-                }
-              }
-            );
-          }
-        });
-      });
+      // data.forEach(item => {
+      //   Photo.create(item, (err, item) => {
+      //     if (err) {
+      //       console.log(err);
+      //     } else {
+      //       console.log("Create a new photo:");
+      //       console.log(item);
+      //       Comment.create(
+      //         {
+      //           author: "Yorick Dan",
+      //           text:
+      //             "This picture is awesome! I just made it as my desktop wallpaper!"
+      //         },
+      //         (err, comment) => {
+      //           if (err) {
+      //             console.log(err);
+      //           } else {
+      //             item.comments.push(comment);
+      //             item.save();
+      //           }
+      //         }
+      //       );
+      //     }
+      //   });
+      // });
     }
   });
 }
