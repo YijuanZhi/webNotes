@@ -3,15 +3,17 @@ let express = require("express");
 let router = express.Router({ mergeParams: true });
 let Comment = require("../modules/comment");
 let Photo = require("../modules/photo");
+let middleware = require("../middleware/index");
 
 // ========================================================
 // Comments Section Routes
 // ========================================================
 // NEW
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
   Photo.findById(req.params.id, (err, photo) => {
-    if (err) {
-      console.log(err);
+    if (err || !photo) {
+      req.flash("error", err.message);
+      res.redirect("back");
     } else {
       res.render("comments/new", { photo: photo });
     }
@@ -22,18 +24,19 @@ router.get("/new", isLoggedIn, (req, res) => {
 router.post("/", (req, res) => {
   let id = req.params.id;
   Photo.findById(id, (err, photo) => {
-    if (err) {
-      console.log(err);
+    if (err || !photo) {
+      req.flash("error", err.message);
     } else {
       Comment.create(req.body.comment, (err, comment) => {
         if (err) {
-          console.log(err);
+          req.flash("error", err.message);
         } else {
           comment.author.id = req.user._id;
           comment.author.username = req.user.username;
           comment.save();
           photo.comments.push(comment);
           photo.save();
+          req.flash("success", "Successfully post a new comment!");
           res.redirect("/items/" + id);
         }
       });
@@ -42,26 +45,34 @@ router.post("/", (req, res) => {
 });
 
 // EDIT
-router.get("/:cid/edit", isOwner, (req, res) => {
+router.get("/:cid/edit", middleware.isCommentOwner, (req, res) => {
   Photo.findById(req.params.id)
     .populate("comments")
     .exec((err, item) => {
-      item.comments.forEach(comment => {
-        if (comment._id.equals(req.params.cid)) {
-          res.render("comments/edit", {
-            comment: comment,
-            item: item
-          });
-        }
-      });
+      if (err || !item) {
+        req.flash("error", err.message);
+        res.redirect("back");
+      } else {
+        item.comments.forEach(comment => {
+          if (comment._id.equals(req.params.cid)) {
+            res.render("comments/edit", {
+              comment: comment,
+              item: item
+            });
+          }
+        });
+      }
     });
 });
 
 // UPDATE
-router.put("/:cid", isOwner, (req, res) => {
+router.put("/:cid", middleware.isCommentOwner, (req, res) => {
   Photo.findById(req.params.id)
     .populate("comments")
     .exec((err, item) => {
+      if (err || !item) {
+        req.flash("error", err.message);
+      }
       item.comments.forEach(comment => {
         if (comment._id.equals(req.params.cid)) {
           Comment.findByIdAndUpdate(
@@ -69,8 +80,9 @@ router.put("/:cid", isOwner, (req, res) => {
             req.body.comment,
             (err, comment) => {
               if (err) {
-                console.log(err);
+                req.flash("error", err.message);
               } else {
+                req.flash("success", "Successfully update your comment!");
                 res.redirect("/items/" + req.params.id);
               }
             }
@@ -81,18 +93,20 @@ router.put("/:cid", isOwner, (req, res) => {
 });
 
 // DESTROY
-router.delete("/:cid", isOwner, (req, res) => {
+router.delete("/:cid", middleware.isCommentOwner, (req, res) => {
   Photo.findById(req.params.id)
     .populate("comments")
     .exec((err, item) => {
+      if (err || !item) {
+        req.flash("error", err.message);
+      }
       item.comments.forEach(comment => {
         if (comment._id.equals(req.params.cid)) {
           Comment.findByIdAndRemove(comment._id, (err, comment) => {
             if (err) {
-              console.log(err);
+              req.flash("error", err.message);
             } else {
-              console.log("Successfully delete comment:");
-              console.log(comment);
+              req.flash("success", "Successfully delete your comment!");
               res.redirect("/items/" + req.params.id);
             }
           });
@@ -100,28 +114,5 @@ router.delete("/:cid", isOwner, (req, res) => {
       });
     });
 });
-
-// Middleware
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
-
-// check if the user has logged in and is the owner
-function isOwner(req, res, next) {
-  if (req.isAuthenticated()) {
-    Photo.findById(req.params.id, (err, item) => {
-      if (item.author.id.equals(req.user._id)) {
-        next();
-      } else {
-        res.redirect("back");
-      }
-    });
-  } else {
-    res.redirect("back");
-  }
-}
 
 module.exports = router;

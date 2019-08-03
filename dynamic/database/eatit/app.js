@@ -5,6 +5,7 @@ let methodOveride = require("method-override");
 let session = require("express-session");
 let passport = require("passport");
 let localStrategy = require("passport-local");
+let flash = require("connect-flash");
 let mongoose = require("mongoose");
 let User = require("./modules/user");
 let commentsRouter = require("./routes/comments");
@@ -18,6 +19,7 @@ app.set("view engine", "ejs");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(methodOveride("_method")); //override POST with potential PUT or DELETE
+app.use(flash());
 
 //Database Setup
 mongoose.connect("mongodb://localhost/photo_camp", { useNewUrlParser: true });
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 // app.use can not use arrow function
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 // use routes

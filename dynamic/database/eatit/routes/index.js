@@ -2,6 +2,7 @@ let express = require("express");
 let router = express.Router({ mergeParams: true });
 let User = require("../modules/user");
 let passport = require("passport");
+let flash = require("connect-flash");
 
 // ========================================================
 // BASIC VIEWS ROUTES
@@ -25,10 +26,14 @@ router.post("/register", (req, res) => {
   let newUser = new User({ username: req.body.username });
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
-      console.log(err);
-      res.render("home");
+      req.flash("error", err.message);
+      res.redirect("back");
     }
     passport.authenticate("local")(req, res, () => {
+      req.flash(
+        "success",
+        "Successfully registered! Welcome, " + req.user.username
+      );
       res.redirect("/items");
     });
   });
@@ -43,7 +48,9 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/items",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    successFlash: "Successfully logged in!",
+    failureFlash: "Can not log in."
   }),
   (req, res) => {}
 );
@@ -51,6 +58,7 @@ router.post(
 // ========================LOGOUT========================
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success", "Successfully logged out!");
   res.redirect("/items");
 });
 

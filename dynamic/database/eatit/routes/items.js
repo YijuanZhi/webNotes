@@ -1,6 +1,7 @@
 let express = require("express");
 let router = express.Router({ mergeParams: true });
 let Photo = require("../modules/photo");
+let middleware = require("../middleware/index");
 
 // ========================================================
 // ITEMS ROUTES
@@ -8,14 +9,18 @@ let Photo = require("../modules/photo");
 router.get("/", (req, res) => {
   Photo.find({}, (err, items) => {
     if (err) {
-      console.log("Something went wrong:");
-      console.log(err);
+      req.flash("error", err.message);
     } else {
       res.render("photos/items", {
         items: items
       });
     }
   });
+});
+
+//NEW
+router.get("/new", middleware.isLoggedIn, (req, res) => {
+  res.render("photos/new");
 });
 
 //CREATE
@@ -31,18 +36,12 @@ router.post("/", (req, res) => {
   };
   Photo.create(newItem, (err, item) => {
     if (err) {
-      console.log("Something went wrong: " + err);
+      req.flash("error", err.message);
     } else {
-      console.log("New item successfully added: ");
-      console.log(item);
+      req.flash("success", "Successful create a new item!");
+      res.redirect("/items");
     }
   });
-  res.redirect("/items");
-});
-
-//NEW
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("photos/new");
 });
 
 //SHOW
@@ -53,8 +52,9 @@ router.get("/:id", (req, res) => {
   Photo.findById({ _id: curId })
     .populate("comments")
     .exec((err, item) => {
-      if (err) {
-        console.log(err);
+      if (err || !item) {
+        req.flash("error", "Photo not found.");
+        res.redirect("back");
       } else {
         res.render("photos/show", { item: item });
       }
@@ -62,47 +62,33 @@ router.get("/:id", (req, res) => {
 });
 
 // EDIT
-router.get("/:id/edit", isOwner, (req, res) => {
+router.get("/:id/edit", middleware.isItemOwner, (req, res) => {
   Photo.findById(req.params.id, (err, item) => {
+    if (err || !item) {
+      req.flash("error", "Photo not found.");
+    }
     res.render("photos/edit", { item: item });
   });
 });
 
 // UPDATE
-router.put("/:id", isOwner, (req, res) => {
+router.put("/:id", middleware.isItemOwner, (req, res) => {
   Photo.findByIdAndUpdate(req.params.id, req.body.photo, (err, item) => {
+    if (err) {
+      req.flash("error", err.message);
+    }
     res.redirect("/items/" + req.params.id);
   });
 });
 
 //DESTROY
-router.delete("/:id", isOwner, (req, res) => {
+router.delete("/:id", middleware.isItemOwner, (req, res) => {
   Photo.findByIdAndRemove(req.params.id, (err, item) => {
+    if (err) {
+      req.flash("error", err.message);
+    }
     res.redirect("/items");
   });
 });
-
-// check if user has logged in
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
-
-// check if the user has logged in and is the owner
-function isOwner(req, res, next) {
-  if (req.isAuthenticated()) {
-    Photo.findById(req.params.id, (err, item) => {
-      if (item.author.id.equals(req.user._id)) {
-        next();
-      } else {
-        res.redirect("back");
-      }
-    });
-  } else {
-    res.redirect("back");
-  }
-}
 
 module.exports = router;
